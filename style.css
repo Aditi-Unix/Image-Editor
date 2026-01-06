@@ -1,0 +1,295 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* ===== VANTA BACKGROUND ===== */
+#vanta-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.vanta-canvas {
+  width: 100%;
+  height: 100%;
+}
+
+html {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  background: transparent;
+  color: var(--text-primary-color);
+}
+
+/* ===== MAIN ===== */
+main {
+  position: relative;
+  z-index: 1;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== TOP CONTROLS ===== */
+.top-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--gutter-lg);
+  padding: var(--padding-lg);
+  flex-shrink: 0;
+}
+
+/* ===== BUTTONS ===== */
+.btn {
+  padding: var(--padding-sm) var(--padding-lg);
+  border-radius: var(--border-radius-md);
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.25s ease,
+              box-shadow 0.25s ease,
+              background 0.25s ease;
+}
+
+.btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.22),
+    rgba(255, 255, 255, 0.08)
+  );
+  backdrop-filter: blur(8px);
+}
+
+.btn:active {
+  transform: scale(0.95);
+}
+
+#reset-btn:hover {
+  background: rgba(255, 77, 77, 0.22);
+}
+
+#download-btn:hover {
+  background: rgba(29, 209, 161, 0.22);
+}
+
+/* ===== CONTENT SECTION ===== */
+main section {
+  flex: 1;
+  width: 100%;
+  padding: var(--padding-2xl);
+  display: flex;
+  gap: var(--gutter-lg);
+  overflow: hidden;
+}
+
+/* ===== LEFT ===== */
+main section .left {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== IMAGE AREA ===== */
+.Bottom {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--border-radius-xl);
+}
+
+.Bottom .placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gutter-md);
+  opacity: 0.6;
+  position: absolute;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%,100% { opacity: 0.6; }
+  50% { opacity: 0.3; }
+}
+
+.Bottom .placeholder i {
+  font-size: 8rem;
+}
+
+.Bottom .placeholder p {
+  font-size: var(--font-size-sm);
+}
+
+/* ===== CANVAS ===== */
+canvas {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* ===== RIGHT PANEL ===== */
+main section .right {
+  width: 30%;
+  padding: var(--padding-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--gutter-md);
+  overflow-y: auto;
+  backdrop-filter: blur(14px);
+  background: rgba(18, 18, 18, 0.8);
+  border-radius: var(--border-radius-lg);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+}
+
+/* ===== FILTERS ===== */
+.filters {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.filter label,
+.filter p {
+  color: #e0e0e0;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.25s ease, color 0.3s ease;
+}
+
+.filter label:hover,
+.filter p:hover {
+  transform: scale(1.08);
+  color: #ff9f43;
+}
+
+.filter input {
+  appearance: none;
+  width: 100%;
+  background: transparent;
+}
+
+.filter input::-webkit-slider-runnable-track {
+  height: 3px;
+  background: var(--bg-active-color);
+  border-radius: 5px;
+}
+
+.filter input::-webkit-slider-thumb {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  background: red;
+  border-radius: 50%;
+  margin-top: -5.5px;
+  cursor: pointer;
+}
+/* ===== PRESETS ===== */
+.presets {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.presets button {
+  padding: 10px 0;
+  font-size: 12px;
+  border-radius: 8px;
+  border: none;
+  background: #f2f2f2;
+  color: black; /* ✅ black hata diya */
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* ✅ Hover par bg & text SAME rahen */
+.presets button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+  background: #f2f2f2;   /* same bg */
+  color: black;       /* same text */
+}
+
+.presets button.active {
+  background: var(--bg-active-color);
+  color: black; /* black nahi */
+}
+
+
+/* ===== HEADINGS ===== */
+h2 {
+  font-size: 18px;
+  letter-spacing: 1px;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+/* ===== SCROLLBAR ===== */
+.right::-webkit-scrollbar {
+  width: 8px;
+}
+.right::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ff4d4d, #ff9f43);
+  border-radius: 10px;
+}
+
+/* TABLET & BELOW */
+@media (max-width: 900px) {
+  main section {
+    flex-direction: column;
+    padding: var(--padding-lg);
+  }
+
+  main section .left,
+  main section .right {
+    width: 100%;
+  }
+
+  main section .right {
+    max-height: 45vh;
+  }
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+  body {
+    overflow-y: auto;
+  }
+
+  .top-controls {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .btn {
+    font-size: 0.85rem;
+    padding: 0.45rem 0.9rem;
+  }
+
+  .presets {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .Bottom {
+    min-height: 240px;
+  }
+}
